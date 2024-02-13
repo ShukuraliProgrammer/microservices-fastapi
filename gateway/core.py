@@ -1,7 +1,6 @@
 import aiohttp
 import functools
 
-
 from importlib import import_module
 from fastapi import Request, Response, HTTPException, status
 from typing import List

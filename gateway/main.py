@@ -1,4 +1,4 @@
-from fastapi import FastAPI, status, Request, Response
+from fastapi import FastAPI, status, Request, Response, APIRouter
 
 from conf import settings
 from core import route
@@ -10,8 +10,13 @@ from datastructures.orders import OrderForm
 
 app = FastAPI()
 
+router = APIRouter(
+    prefix='/api/users'
+)
+
 
 @route(
+    
     request_method=app.post,
     path='/api/login',
     status_code=status.HTTP_201_CREATED,
@@ -114,6 +119,12 @@ async def update_user(user_id: int, user: UserUpdateForm,
 
 @route(
     request_method=app.get,
+    path='/api/users/{user_id}'
+)
+
+
+@route(
+    request_method=app.get,
     path='/api/orders',
     status_code=status.HTTP_200_OK,
     payload_key=None,
@@ -145,3 +156,5 @@ async def get_orders(request: Request, response: Response):
 )
 async def create_order(order: OrderForm, request: Request, response: Response):
     pass
+
+
